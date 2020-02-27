@@ -147,6 +147,7 @@ class _GSYTabBarState extends State<GSYTabBarWidget>
           color: Theme.of(context).primaryColor, //底部导航栏主题颜色
           child: new SafeArea(
             child: new GSYTab.TabBar(
+
               //TabBar导航标签，底部导航放到Scaffold的bottomNavigationBar中
               controller: _tabController,
               //配置控制器

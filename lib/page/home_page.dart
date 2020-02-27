@@ -13,14 +13,12 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         child: ChangeNotifierProvider(
           create: (context) => InfoModel(),
           child: FirstPage(),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -36,11 +34,19 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Consumer<InfoModel>(
       builder: (context, model, _) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-            child: Text("name1 = ${model._name}"),
+          Container(
+            child: Expanded(
+              child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/loading.gif',
+                  width: double.infinity,
+                  height: 150,
+                  fit: BoxFit.cover,
+                  image: 'http://i1.073img.com/160301/17598486_164003_1.jpg'),
+            ),
+            margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
           ),
           FloatingActionButton(
             onPressed: () {
@@ -65,25 +71,21 @@ class SecondPage extends StatefulWidget {
   }
 }
 
-
-
 class _SecondPageState extends State<SecondPage> {
-
   static MethodChannel methodChannel = MethodChannel("sample.flutter.io/test");
 
   Future<void> _getActivityResult() async {
     String result;
     try {
-      final level = await methodChannel.invokeMethod('getAcivityResult'); //通过getAcivityResult传递方法名称，类似于广播中的action
+      final level = await methodChannel.invokeMethod(
+          'getAcivityResult'); //通过getAcivityResult传递方法名称，类似于广播中的action
       result = 'getAcivityResult : $level ';
-      debugPrint(
-        """
+      debugPrint("""
         rsuccess 
         result
         ==
         $result
-        """
-      );
+        """);
     } on PlatformException {
       result = 'Failed to get battery level.';
       debugPrint('''  
@@ -91,10 +93,10 @@ class _SecondPageState extends State<SecondPage> {
       result 
       from
       android2flutter
-      ''' + result);
+      ''' +
+          result);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

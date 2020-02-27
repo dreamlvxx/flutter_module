@@ -55,21 +55,17 @@ class _HomePageState extends State<DeskPage> {
     ];
     return ChangeNotifierProvider(
       create: (context) => homeModel,
-      child:
-//          Container(
-//            child: Text("sadsad"),
-//          )
-        GSYTabBarWidget(
-          type: TabType.bottom,
-          tabItems: tabs,
-          tabViews: <Widget>[
-            HomePage(key: detalisKey),
-            CountWidget(),
-            MinePage(),
-          ],
-          indicatorColor: Colors.blue,
-        ),
-
+      child: GSYTabBarWidget(
+        title: Text("导航栏"),
+        type: TabType.bottom,
+        tabItems: tabs,
+        tabViews: <Widget>[
+          HomePage(key: detalisKey),
+          CountWidget(),
+          MinePage(),
+        ],
+        indicatorColor: Colors.red,
+      ),
     );
   }
 }
@@ -93,17 +89,14 @@ _renderTab(icon, text) {
       return new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Icon(icon, size: 16.0),
+          new Icon(icon, size: 24.0),
           Container(
             child: Center(
                 child: new Text(
               text,
-              style: TextStyle(color: Colors.black, fontSize: 20),
-              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 12.0),
             )),
-            color: Colors.green,
             padding: EdgeInsets.only(top: 2.0),
-            margin: EdgeInsets.only(bottom: 4.0),
           )
         ],
       );
