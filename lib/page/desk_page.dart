@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_module_2/page/home_page.dart';
 import 'package:flutter_module_2/page/mine_page.dart';
 import 'package:flutter_module_2/page/page_state.dart';
@@ -26,23 +27,9 @@ class _HomePageState extends State<DeskPage> {
 
   HomeModule homeModel = HomeModule();
 
-  Future<ResultData> getUser() async {
-    ResultData res = await httpManager
-        .request(Address.getAllUser(), null, null, null, noTip: true);
-    User info = User.fromJson(res.data);
-    homeModel.user = info;
-    debugPrint(info.infos[0].name);
-    return res;
-  }
-
   @override
   void initState() {
     super.initState();
-    debugPrint("请求before");
-//    getUser().then((res) {
-//      debugPrint("请求完成");
-//    });
-    debugPrint("请求after");
   }
 
   @override
@@ -89,7 +76,7 @@ _renderTab(icon, text) {
       return new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Icon(icon, size: 24.0),
+          Icon(icon, size: 24.0),
           Container(
             child: Center(
                 child: new Text(

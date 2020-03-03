@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_module_2/route/CommonRoute.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,10 +50,11 @@ class _FirstPageState extends State<FirstPage> {
             margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
           ),
           FloatingActionButton(
+            heroTag: "ttt",
             onPressed: () {
-              model.name2 = "name 2 变化了";
+              CommonRoute.gotoNews(context, "lvxx");
             },
-            child: Text("click 1"),
+            child: Text("查看更多新闻"),
           ),
           Container(
             height: 300,

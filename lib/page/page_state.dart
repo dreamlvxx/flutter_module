@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class CountWidget extends StatefulWidget {
-  static String pageName= "CountWidget";
+  static String pageName = "CountWidget";
   String name;
 
   @override
@@ -18,9 +18,7 @@ class CountWidgetState extends State<CountWidget> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProviderModel())
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => ProviderModel())],
       child: Scaffold(
         appBar: AppBar(
           title: LayoutBuilder(
