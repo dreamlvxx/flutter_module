@@ -23,7 +23,7 @@ class _NewPageState extends State<NewPage> {
 
   Future<Response> getUser() async {
     Response response;
-    response = await Dio().get("http://192.168.1.101:8899/user/showAllUser");
+    response = await Dio().get("http://192.168.1.104:8899/user/showAllUser");
     debugPrint(response.data.toString());
     User user = User.fromJson(response.data);
     provider.infos = user.infos;

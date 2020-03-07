@@ -1,19 +1,52 @@
-
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-class MinePage extends StatefulWidget{
+class MinePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return MinePageState();
   }
 }
 
-class MinePageState extends State<MinePage>{
+class MinePageState extends State<MinePage> {
   MineModule mineModule;
+  ScrollController _scrollcontroller;
+
+  @override
+  void initState() {
+    super.initState();
+    mineModule = MineModule();
+    _scrollcontroller = ScrollController();
+    _scrollcontroller.addListener(() {
+      if (_scrollcontroller.offset > 100) {}
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollcontroller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Widget _Item(msg, desc, index) {
+      return Container(
+        child: Column(
+          children: <Widget>[
+            Text(
+              msg,
+              style: TextStyle(fontSize: 20, color: Colors.green),
+            ),
+            Text(
+              desc,
+              style: TextStyle(fontSize: 14, color: Colors.yellow),
+            )
+          ],
+        ),
+      );
+    }
 
     Widget waiting = Column(
       children: <Widget>[
@@ -33,11 +66,40 @@ class MinePageState extends State<MinePage>{
         Icon(Icons.error),
       ],
     );
-    Widget done = Column(
-      children: <Widget>[
-        Text('done'),
-        Icon(Icons.done),
-      ],
+
+    Widget done = Container(
+      child: Container(
+          child: NotificationListener<ScrollNotification>(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              floating: true,
+              title: Text("appbar title"),
+              expandedHeight: 150,
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) =>
+                    _Item("item = ${index}", "desc = ${index}", index),
+                childCount: 30,
+              ),
+            )
+          ],
+          controller: _scrollcontroller,
+        ),
+        onNotification: (scrollNotification) {
+          if (scrollNotification is ScrollStartNotification) {
+            //滚动开始
+              Fluttertoast.showToast(msg: "start");
+          } else if (scrollNotification is ScrollUpdateNotification) {
+            //更新滚动位置
+            Fluttertoast.showToast(msg: "update");
+          } else if (scrollNotification is ScrollEndNotification) {
+            //滚动结束
+            Fluttertoast.showToast(msg: "end");
+          }
+        },
+      )),
     );
     Widget none = Column(
       children: <Widget>[
@@ -49,11 +111,11 @@ class MinePageState extends State<MinePage>{
     return ChangeNotifierProvider(
       create: (context) => mineModule,
       child: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 3),null),
-        builder: (context,snap){
-          switch(snap.connectionState){
+        future: Future.delayed(Duration(seconds: 3), null),
+        builder: (context, snap) {
+          switch (snap.connectionState) {
             case ConnectionState.none:
-              if(snap.hasError){
+              if (snap.hasError) {
                 return error;
               }
               return none;
@@ -70,6 +132,4 @@ class MinePageState extends State<MinePage>{
   }
 }
 
-class MineModule with ChangeNotifier{
-
-}
+class MineModule with ChangeNotifier {}
