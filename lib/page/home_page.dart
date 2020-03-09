@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_module_2/channel/mathod_channel.dart';
 import 'package:flutter_module_2/route/CommonRoute.dart';
 import 'package:provider/provider.dart';
 
@@ -15,11 +16,11 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: ChangeNotifierProvider(
-          create: (context) => InfoModel(),
-          child: FirstPage(),
-        ),
-      );
+      child: ChangeNotifierProvider(
+        create: (context) => InfoModel(),
+        child: FirstPage(),
+      ),
+    );
   }
 }
 
@@ -37,17 +38,64 @@ class _FirstPageState extends State<FirstPage> {
       builder: (context, model, _) => Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            child: Expanded(
-              child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/loading.gif',
-                  width: double.infinity,
-                  height: 150,
-                  fit: BoxFit.cover,
-                  image: 'http://i1.073img.com/160301/17598486_164003_1.jpg'),
+            padding: EdgeInsets.all(6.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.white,
             ),
+            child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/loading.gif',
+                width: double.infinity,
+                height: 150,
+                fit: BoxFit.cover,
+                image: 'http://i1.073img.com/160301/17598486_164003_1.jpg'),
             margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text("招聘"),
+                    margin: EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                        color: Colors.cyan,
+                        borderRadius: BorderRadius.circular(10.0)),
+                    height: 30.0,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text("面试"),
+                    margin: EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                        color: Colors.greenAccent,
+                        borderRadius: BorderRadius.circular(10.0)),
+                    height: 30.0,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(4.0),
+                    child: Text("交友"),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10.0)),
+                    height: 30.0,
+                  ),
+                )
+              ],
+              mainAxisSize: MainAxisSize.max,
+            ),
           ),
           FloatingActionButton(
             heroTag: "ttt",
@@ -74,32 +122,6 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  static MethodChannel methodChannel = MethodChannel("sample.flutter.io/test");
-
-  Future<void> _getActivityResult() async {
-    String result;
-    try {
-      final level = await methodChannel.invokeMethod(
-          'getAcivityResult'); //通过getAcivityResult传递方法名称，类似于广播中的action
-      result = 'getAcivityResult : $level ';
-      debugPrint("""
-        rsuccess 
-        result
-        ==
-        $result
-        """);
-    } on PlatformException {
-      result = 'Failed to get battery level.';
-      debugPrint('''  
-      get
-      result 
-      from
-      android2flutter
-      ''' +
-          result);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<InfoModel>(
@@ -114,7 +136,7 @@ class _SecondPageState extends State<SecondPage> {
             child: Text("click 2"),
             onPressed: () {
               model.name = "name 1  变化了";
-              _getActivityResult();
+              FlutterMethodChannel.getActivityResult();
             },
           )
         ],

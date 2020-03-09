@@ -2,9 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_module_2/model/user.dart';
-import 'package:flutter_module_2/utils/common/http/address.dart';
-import 'package:flutter_module_2/utils/common/http/http_utils.dart';
-import 'package:flutter_module_2/utils/common/http/result_data.dart';
 import 'package:provider/provider.dart';
 
 class NewPage extends StatefulWidget {
@@ -23,7 +20,7 @@ class _NewPageState extends State<NewPage> {
 
   Future<Response> getUser() async {
     Response response;
-    response = await Dio().get("http://192.168.1.104:8899/user/showAllUser");
+    response = await Dio().get("http://192.168.1.103:8899/user/showAllUser");
     debugPrint(response.data.toString());
     User user = User.fromJson(response.data);
     provider.infos = user.infos;

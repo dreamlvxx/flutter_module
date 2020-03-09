@@ -93,7 +93,7 @@ class MinePageState extends State<MinePage> {
               Fluttertoast.showToast(msg: "start");
           } else if (scrollNotification is ScrollUpdateNotification) {
             //更新滚动位置
-            Fluttertoast.showToast(msg: "update");
+//            Fluttertoast.showToast(msg: "update");
           } else if (scrollNotification is ScrollEndNotification) {
             //滚动结束
             Fluttertoast.showToast(msg: "end");
