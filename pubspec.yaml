@@ -18,7 +18,10 @@ description: A new Flutter module.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  #dart sdk
+  sdk: 2.8.0-dev.12.0.flutter-9983424a3c
+  #flutter sdk
+  flutter: 1.15.18
 
 dependencies:
   flutter:

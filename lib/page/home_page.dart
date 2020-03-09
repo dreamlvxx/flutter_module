@@ -55,7 +55,7 @@ class _FirstPageState extends State<FirstPage> {
             margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
           ),
           Container(
-            margin: EdgeInsets.only(top: 10.0),
+            margin: EdgeInsets.all( 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,6 +97,29 @@ class _FirstPageState extends State<FirstPage> {
               mainAxisSize: MainAxisSize.max,
             ),
           ),
+          Stack(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                    color: Colors.lime,
+                    borderRadius: BorderRadius.circular(8.0)),
+                width: double.infinity,
+                height: 100.0,
+                child: Text(
+                  "最新动态",
+                  style: TextStyle(color: Color(0xffff00ff), fontSize: 24),
+                ),
+              ),
+              Positioned(
+                top: 50,
+                left: 30,
+                child: Text("通知"),
+              )
+            ],
+          ),
           FloatingActionButton(
             heroTag: "ttt",
             onPressed: () {
@@ -105,7 +128,7 @@ class _FirstPageState extends State<FirstPage> {
             child: Text("查看更多新闻"),
           ),
           Container(
-            height: 300,
+            height: 200,
             child: SecondPage(),
           )
         ],

@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: '大学堂',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+              primaryColor: Colors.greenAccent,
+              iconTheme: IconThemeData(color: Colors.yellow),
+              textTheme: TextTheme(body1: TextStyle(color: Colors.red))),
           home: DeskPage(),
         );
         break;
