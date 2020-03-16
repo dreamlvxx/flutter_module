@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_module_2/channel/mathod_channel.dart';
 import 'package:flutter_module_2/route/CommonRoute.dart';
+import 'package:flutter_module_2/widget/android_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +33,24 @@ class FirstPage extends StatefulWidget {
   }
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstPageState extends State<FirstPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  Animation anim;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1000));
+    anim = Tween(begin: 50, end: 200).animate(animationController)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          Fluttertoast.showToast(msg: "finish anim");
+        }
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<InfoModel>(
@@ -55,7 +74,7 @@ class _FirstPageState extends State<FirstPage> {
             margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
           ),
           Container(
-            margin: EdgeInsets.all( 10.0),
+            margin: EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,40 +146,21 @@ class _FirstPageState extends State<FirstPage> {
             },
             child: Text("查看更多新闻"),
           ),
+//          Container(
+//            height: 200,
+//            child: AnimatedBuilder(
+//              animation: anim,
+//              child: Container(
+//
+//              ),
+//            ),
+//          )
           Container(
-            height: 200,
-            child: SecondPage(),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class SecondPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _SecondPageState();
-  }
-}
-
-class _SecondPageState extends State<SecondPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<InfoModel>(
-      builder: (context, model, _) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Expanded(
-            child: Text("model name 2 = ${model._name2}"),
-          ),
-          FloatingActionButton(
-            child: Text("click 2"),
-            onPressed: () {
-              model.name = "name 1  变化了";
-              FlutterMethodChannel.getActivityResult();
-            },
+            width: double.infinity,
+            height: 100.0,
+            child: SampleView(
+              ccc: NativeViewController(),
+            ),
           )
         ],
       ),
