@@ -9,7 +9,7 @@ part of 'test.dart';
 Test _$TestFromJson(Map<String, dynamic> json) {
   return Test(
     json['statusCode'] as int,
-    json['data'] == null
+    json["data"] == null
         ? null
         : Data.fromJson(json['data'] as Map<String, dynamic>),
   );

@@ -10,8 +10,8 @@ class MinePage extends StatefulWidget {
 }
 
 class MinePageState extends State<MinePage> {
-  MineModule mineModule;
-  ScrollController _scrollcontroller;
+  late MineModule mineModule;
+  late ScrollController _scrollcontroller;
 
   @override
   void initState() {
@@ -98,6 +98,7 @@ class MinePageState extends State<MinePage> {
             //滚动结束
             Fluttertoast.showToast(msg: "end");
           }
+          return true;
         },
       )),
     );

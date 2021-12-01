@@ -15,7 +15,7 @@ class HttpManager {
   static const CONTENT_TYPE_JSON = "application/json";
   static const CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
 
-  Dio _dio; // 使用默认配置
+  Dio? _dio; // 使用默认配置
 
   final TokenInterceptors _tokenInterceptors = new TokenInterceptors();
 
@@ -23,15 +23,15 @@ class HttpManager {
 
     _dio ??= Dio();
 
-    _dio.interceptors.add(new HeaderInterceptors());
+    _dio?.interceptors.add(new HeaderInterceptors());
 
-    _dio.interceptors.add(_tokenInterceptors);
+    _dio?.interceptors.add(_tokenInterceptors);
 
-    _dio.interceptors.add(new LogsInterceptors());
+    _dio?.interceptors.add(new LogsInterceptors());
 
-    _dio.interceptors.add(new ErrorInterceptors(_dio));
+    _dio?.interceptors.add(new ErrorInterceptors(_dio));
 
-    _dio.interceptors.add(new ResponseInterceptors());
+    _dio?.interceptors.add(new ResponseInterceptors());
   }
 
   ///发起网络请求
@@ -55,14 +55,12 @@ class HttpManager {
     }
 
     resultError(DioError e) {
-      Response errorResponse;
+      late Response errorResponse;
       if (e.response != null) {
-        errorResponse = e.response;
-      } else {
-        errorResponse = new Response(statusCode: 666);
+        errorResponse = e.response!;
       }
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout) {
         errorResponse.statusCode = Code.NETWORK_TIMEOUT;
       }
       return new ResultData(
@@ -73,7 +71,7 @@ class HttpManager {
 
     Response response;
     try {
-      response = await _dio.request(url, data: params, options: option);
+      response = await _dio!.request(url, data: params, options: option);
     } on DioError catch (e) {
       return resultError(e);
     }
@@ -85,12 +83,12 @@ class HttpManager {
 
   ///清除授权
   clearAuthorization() {
-    _tokenInterceptors.clearAuthorization();
+    // _tokenInterceptors.clearAuthorization();
   }
 
   ///获取授权token
   getAuthorization() async {
-    return _tokenInterceptors.getAuthorization();
+    // return _tokenInterceptors.getAuthorization();
   }
 }
 

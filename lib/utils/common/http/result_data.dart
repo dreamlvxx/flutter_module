@@ -4,11 +4,11 @@
  * Date: 2018-07-16
  */
 class ResultData {
-  var data;
-  bool result;
-  int code;
-  var headers;
-  String msg;
+  late var data;
+  late bool? result;
+  late int? code;
+  late var headers;
+  late String? msg;
 
   ResultData(this.data, this.result, this.code, {this.headers});
 }

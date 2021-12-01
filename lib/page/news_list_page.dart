@@ -48,8 +48,8 @@ class _NewPageState extends State<NewPage> {
                 child: Expanded(
                   child: ListView.separated(
                     itemBuilder: (context, index) => _ItemCreator(
-                        "itemName = ${model.infos[index].name}"),
-                    itemCount: model.infos.length,
+                        "itemName = ${model.infos?[index]?.name}"),
+                    itemCount: model.infos?.length ?? 0 ,
                     separatorBuilder: (context, index) => Divider(
                       color: Colors.green,
                       height: 2,
@@ -76,11 +76,11 @@ class _NewPageState extends State<NewPage> {
 }
 
 class NewsProvider extends ChangeNotifier {
-  List<Infos> _infos = List();
+  List<Infos?>? _infos = [];
 
-  List<Infos> get infos => _infos;
+  List<Infos?>? get infos => _infos;
 
-  set infos(List<Infos> value) {
+  set infos(List<Infos?>? value) {
     _infos = value;
     notifyListeners();
   }

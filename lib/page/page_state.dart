@@ -11,7 +11,7 @@ class CountWidget extends StatefulWidget {
     return CountWidgetState();
   }
 
-  CountWidget({this.name});
+  CountWidget({required this.name});
 }
 
 class CountWidgetState extends State<CountWidget> {

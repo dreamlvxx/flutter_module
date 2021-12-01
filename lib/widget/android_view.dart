@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 //原生视图控制器
 class NativeViewController {
-  MethodChannel _channel;
+  late MethodChannel _channel;
   //原生视图完成创建后，通过id生成唯一方法通道
   onCreate(int id) {
     _channel = MethodChannel('samples.chenhang/native_views_$id');
@@ -18,8 +18,8 @@ class NativeViewController {
 //原生视图Flutter侧封装，继承自StatefulWidget
 class SampleView extends StatefulWidget {
   const SampleView({
-    Key key,
-    this.ccc,
+    Key? key,
+    required this.ccc,
   }) : super(key: key);
 
   //持有视图控制器

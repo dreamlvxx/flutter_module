@@ -9,7 +9,7 @@ import 'package:flutter_module_2/route/CommonRoute.dart';
 void main() => runApp(MyApp(window.defaultRouteName));
 
 class MyApp extends StatelessWidget {
-  String route;
+  String route = "home";
   MyApp(this.route);
 
   @override
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
               primaryColor: Colors.greenAccent,
               iconTheme: IconThemeData(color: Colors.yellow),
-              textTheme: TextTheme(body1: TextStyle(color: Colors.red))),
+              textTheme: TextTheme(button: TextStyle(color: Colors.red))),
           home: DeskPage(),
         );
         break;
@@ -30,9 +30,10 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: '大学堂',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: Text("undefined router"),
+              primaryColor: Colors.greenAccent,
+              iconTheme: IconThemeData(color: Colors.yellow),
+              textTheme: TextTheme(button: TextStyle(color: Colors.red))),
+          home: DeskPage(),
         );
         break;
     }

@@ -5,7 +5,7 @@ import 'package:flutter_module_2/page/home_page.dart';
 import 'package:flutter_module_2/page/mine_page.dart';
 import 'package:flutter_module_2/page/page_state.dart';
 import 'package:flutter_module_2/model/user.dart';
-import 'package:flutter_module_2/widget/tab_bar_widget.dart';
+// import 'package:flutter_module_2/widget/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:android_intent/android_intent.dart';
@@ -39,16 +39,8 @@ class _HomePageState extends State<DeskPage> {
     ];
     return ChangeNotifierProvider(
       create: (context) => homeModel,
-      child: GSYTabBarWidget(
-        title: Text("导航栏"),
-        type: TabType.bottom,
-        tabItems: tabs,
-        tabViews: <Widget>[
-          HomePage(key: detalisKey),
-          CountWidget(),
-          MinePage(),
-        ],
-        indicatorColor: Colors.red,
+      child: Text(
+        'sssssss'
       ),
     );
   }
@@ -89,7 +81,7 @@ _renderTab(icon, text) {
 }
 
 class HomeModule with ChangeNotifier {
-  User _user;
+  late User _user;
 
   User get user => _user;
 

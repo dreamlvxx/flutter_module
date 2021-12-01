@@ -7,7 +7,7 @@ part 'user.g.dart';
 class User extends Object {
 
   @JsonKey(name: 'infos')
-  List<Infos> infos;
+  List<Infos?>? infos;
 
   User(this.infos,);
 

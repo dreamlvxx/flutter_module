@@ -10,7 +10,7 @@ class Test extends Object {
   int statusCode;
 
   @JsonKey(name: 'data')
-  Data data;
+  Data? data;
 
   Test(this.statusCode,this.data,);
 
@@ -25,13 +25,13 @@ class Test extends Object {
 class Data extends Object {
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   @JsonKey(name: 'email')
-  String email;
+  String? email;
 
   @JsonKey(name: 'pics')
-  List<String> pics;
+  List<String>? pics;
 
   Data(this.name,this.email,this.pics,);
 

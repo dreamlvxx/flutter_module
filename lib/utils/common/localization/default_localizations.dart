@@ -18,7 +18,7 @@ class GSYLocalizations {
     'zh': new GSYStringZh(),
   };
 
-  GSYStringBase get currentLocalized {
+  GSYStringBase? get currentLocalized {
     if (_localizedValues.containsKey(locale.languageCode)) {
       return _localizedValues[locale.languageCode];
     }
@@ -33,7 +33,7 @@ class GSYLocalizations {
 
   ///通过 Localizations 加载当前的 GSYLocalizations
   ///获取对应的 GSYStringBase
-  static GSYStringBase i18n(BuildContext context) {
+  static GSYStringBase? i18n(BuildContext context) {
     return (Localizations.of(context, GSYLocalizations) as GSYLocalizations)
         .currentLocalized;
   }

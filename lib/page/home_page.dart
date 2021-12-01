@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({required Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return new HomePageState();
@@ -35,8 +35,8 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage>
     with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation anim;
+  late AnimationController animationController;
+  late Animation anim;
 
   @override
   void initState() {
@@ -170,8 +170,8 @@ class _FirstPageState extends State<FirstPage>
 
 class InfoModel with ChangeNotifier {
   int _count = 0;
-  String _name;
-  String _name2;
+  late String _name;
+  late String _name2;
 
   String get name2 => _name2;
 
